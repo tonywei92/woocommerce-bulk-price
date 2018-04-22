@@ -1,0 +1,1 @@
+# woocommerce-bulk-price
