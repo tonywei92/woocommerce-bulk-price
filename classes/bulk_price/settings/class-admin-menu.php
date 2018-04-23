@@ -7,6 +7,11 @@ class Admin_Menu {
 	function __construct() {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_menu', array( $this, 'add_bulk_menu' ) );
+
+	}
+
+	function admin_footer() {
+		return '<span>Bulk Price for WooCommerce. Created by Tony Song <a href="mailto">tonywei92@gmail.com</a></span>';
 	}
 
 	function register_settings() {
@@ -18,11 +23,12 @@ class Admin_Menu {
 		$page_title = "Bulk Price Settings";
 		$menu_title = "Bulk Price";
 		$capability = "manage_options";
-		$function   = array( $this, 'my_plugin_options' );
+		$function   = array( $this, 'bulk_price_option_page' );
 		add_submenu_page( $this->parent_slug, $page_title, $menu_title, $capability, $this->parent_slug . '-bulkprice', $function );
 	}
 
-	function my_plugin_options() {
+	function bulk_price_option_page() {
+		add_filter('admin_footer_text', array($this,'admin_footer'));
 		?>
         <div class="wrap">
             <h1>Bulk Price Settings</h1>
